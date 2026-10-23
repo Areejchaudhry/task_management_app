@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TaskFlow task management dashboard">
+  <title>TaskFlow | Task Manager</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/">
+        <span class="brand-icon">T</span>
+        <span>TaskFlow</span>
+      </a>
+
+      <p class="nav-label">WORKSPACE</p>
+      <nav>
+        <a class="nav-link active" href="#dashboard">▦ <span>Dashboard</span></a>
+        <a class="nav-link" href="#tasks">☷ <span>All Tasks</span></a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="profile-avatar">TF</div>
+        <div>
+          <strong>My Workspace</strong>
+          <small>Personal task manager</small>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR WORKSPACE</p>
+          <h1>Task Dashboard</h1>
+          <p class="muted">Organize your work. Make progress every day.</p>
+        </div>
+        <button class="primary-btn" id="openFormBtn">+ New Task</button>
+      </header>
+
+      <section class="stats-grid" aria-label="Task statistics">
+        <article class="stat-card">
+          <div class="stat-icon purple">▦</div>
+          <p>Total tasks</p>
+          <h2 id="totalCount">0</h2>
+          <small>All your tasks</small>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon orange">◷</div>
+          <p>Pending</p>
+          <h2 id="pendingCount">0</h2>
+          <small>Waiting to start</small>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon blue">↻</div>
+          <p>In progress</p>
+          <h2 id="progressCount">0</h2>
+          <small>Currently working on</small>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon green">✓</div>
+          <p>Completed</p>
+          <h2 id="completedCount">0</h2>
+          <small>Successfully finished</small>
+        </article>
+      </section>
+
+      <section class="tasks-section" id="tasks">
+        <div class="section-heading">
+          <div>
+            <h2>Your Tasks</h2>
+            <p class="muted">Manage and track your activities.</p>
+          </div>
+
+          <div class="filters">
+            <label class="sr-only" for="statusFilter">Filter by status</label>
+            <select id="statusFilter">
+              <option value="">All statuses</option>
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+            <button class="secondary-btn" id="refreshBtn">↻ Refresh</button>
+          </div>
+        </div>
+
+        <div id="message" class="message" role="status" aria-live="polite"></div>
+
+        <form id="taskForm" class="task-form hidden">
+          <div class="form-heading">
+            <h3 id="formTitle">Create a new task</h3>
+            <button type="button" class="icon-btn" id="closeFormBtn" aria-label="Close form">×</button>
+          </div>
+
+          <div class="form-grid">
+            <div class="field full-width">
+              <label for="title">Task title *</label>
+              <input id="title" name="title" type="text" minlength="2"
+                maxlength="100" placeholder="e.g. Complete project documentation"
+                required>
+            </div>
+
+            <div class="field full-width">
+              <label for="description">Description</label>
+              <textarea id="description" name="description" maxlength="500"
+                rows="3" placeholder="Add some details about this task"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="priority">Priority</label>
+              <select id="priority" name="priority">
+                <option value="Low">Low</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="status">Status</label>
+              <select id="status" name="status">
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="dueDate">Due date</label>
+              <input id="dueDate" name="dueDate" type="date">
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="secondary-btn" id="cancelBtn">Cancel</button>
+            <button type="submit" class="primary-btn" id="saveBtn">Save Task</button>
+          </div>
+        </form>
+
+        <div id="taskList" class="task-list">
+          <div class="loading-state">Loading your tasks...</div>
+        </div>
+      </section>
+
+      <footer>TaskFlow · Full-stack task management application</footer>
+    </main>
+  </div>
+</body>
+</html>
